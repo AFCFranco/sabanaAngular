@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="toggleSidenav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-name">Sistema PC2:</span>
+    <span class="user-name">
+      {{(userService?.userObs | async)?.first_name}}&nbsp;{{(userService?.userObs | async)?.last_name}}
+    </span>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+      <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+        <!-- <li>
+          <button mat-icon-button matTooltip="Alertas">
+            <mat-icon>notifications</mat-icon>
+          </button>
+        </li> -->
+        <li>
+          <button mat-icon-button matTooltip="Sesión" [matMenuTriggerFor]="navMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #navMenu="matMenu">
+            <div  fxLayout="row" fxLayoutAlign="center center" style="min-width: 180px;">
+              <span class="user-name">
+                {{(userService?.userObs | async)?.first_name}}&nbsp;{{(userService?.userObs | async)?.last_name}}
+              </span>
+            </div>
+            <mat-divider></mat-divider>
+            <!-- <mat-nav-list dense>
+              <ng-template let-last="last" ngFor [ngForOf]="[0]">
+                <a mat-list-item [routerLink]="['userconfig']">
+                  <mat-icon matListAvatar>account_circle</mat-icon>
+                  <h4 mat-line><span class="text-wrap">Configuraciones de usuario</span></h4>
+                </a>
+                <mat-divider *ngIf="!last"></mat-divider>
+              </ng-template>
+            </mat-nav-list> -->
+            <mat-divider></mat-divider>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <button mat-button color="accent"  (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Cerrar sesión</span>
+              </button>
+            </div>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

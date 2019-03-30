@@ -1,0 +1,31 @@
+<div layout="row">
+  <div class="card card-login mx-auto mt-5">
+    <div class="card-header">Iniciar sesión</div>
+    <div class="card-body">
+      <form>
+        <div class="form-group">
+          <label>Usuario</label>
+          <span *ngFor="let error of authService?.errors?.username">
+            <br />
+            {{ error }}
+          </span>
+          <input class="form-control" name="username" type="text" placeholder="Ingrese usuario" required="" [(ngModel)]="user.username">
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label>
+          <span *ngFor="let error of authService?.errors?.password">
+            <br />
+            {{ error }}
+          </span>
+          <input class="form-control" name="password" type="password" placeholder="Ingrese contraseña" required=""
+            [(ngModel)]="user.password" (keyup.enter)="logIn()">  
+        </div>
+        <a class="btn btn-primary btn-block text-white" (click)="logIn()">Acceder</a>
+        <span *ngFor="let error of authService?.errors?.non_field_errors">{{ error }}</span>
+      </form>
+      <div class="text-center">
+        <a class="d-block small mt-3 " href="forgot-password.html">¿Olvidó su contraseña?</a>
+      </div>
+    </div>
+  </div>
+</div>

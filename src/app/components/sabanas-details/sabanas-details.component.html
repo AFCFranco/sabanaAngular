@@ -1,0 +1,146 @@
+<form class="sabanas-details-container" [formGroup]="myForm" autocomplete="off" (ngSubmit)="onSave()">
+  <mat-card style="margin: 0%;">
+    <div class="details-container" fxLayout="column" >
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <div>
+          <span class="sabanas-details-created-at" *ngIf="sabanaAndRecordData?.record">
+            Fecha de creación: {{sabanaAndRecordData?.record?.created_at| date : 'M/d/yyyy, h:mm a'}}
+          </span>
+        </div>
+      </div>
+      <div fxFlex class="content-divider">
+          <mat-divider></mat-divider>
+        </div>
+      <div fxLayout="row" fxLayoutGap="gappx">
+        <div fxFlex fxLayout fxLayoutAlign="flex-start">
+          <span class="title" *ngIf="!sabanaAndRecordData?.record">Crear ó asociar un paciente con la sábana:</span>
+          <span class="title" *ngIf="sabanaAndRecordData?.record">Detalles del paciente:</span>
+        </div>
+        <div fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button class="create-record-btn" mat-icon-button *ngIf="isFormGroupEnabled" matTooltip="Crear registro" (click)="createRecord()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <div>
+          <mat-form-field>
+            <mat-select #doctype placeholder="*Tipo Documento" formControlName="doc_type" autocomplete="nope">
+              <mat-option *ngFor="let doctype of doctypeOptions" [value]="doctype.value">
+                {{ doctype?.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="myForm.get('doc_type')?.invalid">Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput #ndocument type="number" placeholder="*N° documento" formControlName="n_document"
+              [matAutocomplete]="userautocomplete">
+            <mat-hint align="end">{{ndocument.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="myForm.get('n_document')?.invalid">Campo requerido mínimo 8 y máximo 10 dígitos</mat-error>
+          </mat-form-field>
+          <mat-autocomplete #userautocomplete="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoadingPatient" class="is-loading">
+              <mat-spinner diameter="30"></mat-spinner>
+            </mat-option>
+            <ng-container *ngIf="!isLoadingPatient">
+              <mat-option *ngFor="let patient of filteredPatients" [value]="patient?.n_document" (click)="setPatient(patient)">
+                <span>{{ patient?.first_name }}</span>
+                <small> | ID: {{patient?.n_document}}</small>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <mat-select #gender placeholder="*Género" formControlName="gender" autocomplete="nope">
+              <mat-option *ngFor="let gender of genderOptions" [value]="gender?.value">
+                {{ gender?.viewValue}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="myForm.get('gender')?.invalid">Campo requerido</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput #firstname maxlength="30" placeholder="*Nombre" formControlName="first_name" autocomplete="nope">
+            <mat-hint align="end">{{firstname.value?.length || 0}}/30</mat-hint>
+            <mat-error *ngIf="myForm.get('first_name')?.invalid">Campo requerido mínimo 3 y máximo 30 dígitos</mat-error>
+          </mat-form-field>
+  
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput #lastname maxlength="90" placeholder="Apellidos" formControlName="last_name" autocomplete="nope">
+            <mat-hint align="end">{{lastname.value?.length || 0}}/90</mat-hint>
+            <mat-error *ngIf="myForm.get('last_name')?.invalid">Campo mínimo 5 y máximo 90 dígitos</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+  
+        <div>
+          <mat-form-field>
+            <input matInput #height type="number" min="0" placeholder="*Altura (cm)" formControlName="height">
+            <mat-hint align="end">{{height.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="myForm.get('height')?.invalid">Altura max: 200 cm</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput #weight type="number" min="0" placeholder="*Peso (kg)" formControlName="weight">
+            <mat-hint align="end">{{weight.value?.length || 0}}/5</mat-hint>
+            <mat-error *ngIf="myForm.get('weight')?.invalid">Peso max: 300 kg</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput autocomplete="nope" type="text" placeholder="*Fecha nacimiento año-mes-dia" formControlName="birthday">
+            <mat-error *ngIf="myForm.get('birthday').hasError('formatBirthday') ">Fecha inválida YYYY-MM-DD</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput autocomplete="nope" placeholder="*Correo electrónico" formControlName="email">
+            <mat-error *ngIf="myForm.get('email').hasError('required') ">Campo requerido</mat-error>
+            <mat-error *ngIf="myForm.get('email').hasError('email') && !myForm.get('email').hasError('required')">Correo
+              inválido!</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field>
+            <input matInput #address maxlength="120" placeholder="*Dirección" formControlName="address" autocomplete="nope">
+            <mat-hint align="end">{{address.value?.length || 0}}/120</mat-hint>
+            <mat-error *ngIf="myForm.get('address')?.invalid">Campo mínimo 10 y máximo 120 dígitos</mat-error>
+          </mat-form-field>
+        </div>
+  
+      </div>
+      <!-- <div class="content-divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <span class="title" > Condición del paciente</span>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <div>
+          <mat-form-field fxLayoutAlign="center center">
+            <input matInput #condition maxlength="150" placeholder="Condición" formControlName="condition" autocomplete="nope">
+            <mat-hint align="end">{{condition.value?.length || 0}}/150</mat-hint>
+            <mat-error *ngIf="myForm.get('condition')?.invalid">Campo máximo de 150 dígitos</mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+    </div>
+  
+  </mat-card>
+  </form>

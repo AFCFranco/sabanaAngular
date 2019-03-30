@@ -1,0 +1,117 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over">
+    <div fxLayout="column" fxFlex="100" fxLayoutGap="gappx">
+      <a href=""></a>
+      <div class="part1"fxFlex="5"  class="item-group-sidenav" fxLayout="row" fxLayoutAlign="center start">
+        <a fxFlex (click)="sidenav.toggle()">
+          <mat-icon matListIcon style="vertical-align: middle;">menu</mat-icon>
+          <span class="app-name" style="vertical-align: middle;">Sistema PC2</span>
+        </a>
+      </div>
+      <div class="part2">
+        <div class="item-group-sidenav" fxLayout="row wrap" fxFlex="100">
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" class="item-group-title">
+            <span>Módulos</span>
+          </div>
+          <div fxFlex="100" fxLayout="row">
+            <div class="custom-nav-item" fxFlex="100" [ngClass]="{'active': selected_item === 1, 'deactive': selected_item !== 1}"
+              (click)="setSelectedItem(1)" [routerLink]="['sabanas']">
+              <mat-icon>hotel</mat-icon>
+              <span class="option-text">
+                Sábanas
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="part3" fxFlex="80" fxLayout="row wrap" fxLayoutAlign="auto flex-end">
+        <div class="item-group-sidenav" fxLayout="row wrap" fxFlex="100">
+          <div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" class="item-group-title">
+            <span>Usuario</span>
+          </div>
+          <div fxFlex="100" fxLayout="column">
+            <div class="custom-nav-item" [ngClass]="{'active': selected_item === 2, 'deactive': selected_item !== 2}"
+              (click)="setSelectedItem(1)" [routerLink]="['userconfig']">
+              <mat-icon>account_circle</mat-icon>
+              <span class="option-text">
+                Configuraciones
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="part4" fxFlex fxLayout="row" fxLayoutAlign="auto flex-end">
+        <div  fxFlex="100" fxLayout="row" fxLayoutAlign="center center">
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+    <!-- <mat-list fxLayout="column" style="height: 100%; margin: 0%;"  fxLayoutGap="5px">
+      
+      <div fxFlex="5" class="item-group-sidenav" fxflex fxLayout="column wrap" fxLayoutAlign="start start" fxLayoutGap="gappx">
+        <a mat-list-item (click)="sidenav.toggle()">
+          <mat-icon matListIcon>menu</mat-icon>
+          <span class="app-name">Sistema PC2</span> 
+        </a>
+      </div>
+      <div class="item-group-sidenav" fxFlex="80" fxLayout="column wrap"  fxLayoutGap="gappx" >
+        <div fxLayout="row" fxLayoutAlign="start center" class="item-group-title">
+          <span >Módulos</span>
+        </div>
+        <div fxLayout="column" >
+          <a mat-list-item [ngClass]="{'active': selected_item === 1, 'deactive': selected_item !== 1}" (click)="setSelectedItem(1)"
+            [routerLink]="['sabanas']">
+            <mat-icon matListIcon>hotel</mat-icon>
+            <span class="option-text">
+                Sábanas
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="item-group-sidenav" fxFlex="10" fxLayout="column wrap"  fxLayoutGap="gappx" >
+        <div fxLayout="row" fxLayoutAlign="start center" class="item-group-title">
+          <span >Módulos</span>
+        </div>
+        <div fxLayout="column" >
+          <a mat-list-item [ngClass]="{'active': selected_item === 2, 'deactive': selected_item !== 2}" (click)="setSelectedItem(1)"
+            [routerLink]="['userconfig']">
+            <mat-icon matListIcon>account_circle</mat-icon>
+            <span class="option-text">
+                Configuraciones
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="item-group-sidenav" fxFlex="5" fxLayout="column" fxLayoutAlign="center center" >
+        <app-footer fxFlex="100" fxLayoutAlign="center center" ></app-footer>
+      </div>
+    </mat-list> -->
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-nav (toggleSidenav)="sidenav.toggle()"></app-nav>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+
+<!-- <mat-sidenav-container  fullscreen>
+  <mat-sidenav #sidenav mode="side" class="sidenav-pc2" [ngStyle]="{ 'width.em': sidenavWidth }" [opened]="sidenavMenuService.isMenuActivatedObs | async"
+  (mouseenter)="increase()" (mouseleave)="decrease()">
+    <div flex class="mat-content bgc-grey-50">
+      <mat-nav-list>
+        <a mat-list-item [ngClass]="{active: selected_item === 1, 'deactive': selected_item !== 1}" (click)="setSelectedItem(1)"
+          [routerLink]="['sabanas']">
+          <mat-icon matListIcon>hotel</mat-icon>Sábanas
+        </a>
+        <mat-divider></mat-divider>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content >
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

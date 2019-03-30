@@ -1,0 +1,21 @@
+<div class="region-alerts-container" fxLayoutAlign="center center" fxLayout="column">
+  <div class="title" fxFlex> Región {{region_name}}
+  </div>
+  <div *ngIf="region_alert" fxFlex>
+    <span>
+      Se han presentado {{region_alert?.count}} alertas iniciadas a partir de la fecha
+      {{region_alert?.created_at | date: 'M/d/yyyy, h:mm a'}}
+    </span>
+      <!-- <li  *ngFor="let alert of region_alerts" [ngClass]="{'alert-date-no-active': alert?.status === 'F', 'alert-date-active': alert?.status === 'A'}">
+        <span >{{alert?.created_at | date: 'M/d/yyyy, h:mm a'}}</span>
+      </li> -->
+  </div>
+  <div *ngIf="!region_alert" fxFlex>
+    <span class="no-alert-msg">No se han detectado alertas en esta región</span>
+  </div>
+  <!-- <div fxFlex fxLayout fxLayoutAlign="flex-end">
+    <button mat-icon-button>
+      <mat-icon>build</mat-icon>
+    </button>
+  </div> -->
+</div>

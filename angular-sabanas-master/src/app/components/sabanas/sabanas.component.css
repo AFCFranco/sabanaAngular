@@ -1,0 +1,151 @@
+
+
+
+
+.indications-list {
+  padding: 1%;
+}
+
+.indications-list div {
+  margin-right: 25px;
+}
+
+
+.sabana-icon{
+  position: absolute;
+  font-size: 18px;
+  top: 9px; 
+  left: 7.5px;
+}
+
+
+
+
+
+
+
+.btn-record:hover{
+  background-color: lightcyan;
+  -webkit-box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+   -moz-box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+        box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+}
+.btn-sabana:hover{
+  background-color: lightcyan;
+  -webkit-box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+   -moz-box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+        box-shadow: 0 0 6px 4px rgb(149, 205, 243);
+}
+
+.btn-sabana .popover{
+
+  width:30px;
+}
+.popover{
+  max-width: 50px; /* Max Width of the popover (depending on the container!) */
+  max-width: 50px !important;
+}
+
+/* .no-apply-icon{
+  margin: 2%;
+} */
+
+@media (min-width: 960px) {
+  .mat-column-sabana_status {
+    max-width: 100px;
+    display:flex;
+    justify-content:center;
+  }
+  
+  .mat-column-patient {
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+  }
+  
+  .mat-column-gender {
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+  }
+  
+  .mat-column-n_document {
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+  }
+  
+  .mat-column-record_status {
+    max-width: 80px;
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+  }
+  
+  
+  
+  .mat-tooltip {
+    white-space: pre-line;
+  }
+}
+
+@media screen and (max-width: 959px){
+  .mat-table {
+    border: 0;
+    margin: 0%;
+    vertical-align: middle
+  }
+  /* .mat-table caption {
+    font-size: 1em;
+  } */
+  
+  .mat-table .mat-header-cell{
+    border: 10px solid;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+
+    padding-left: 4%;
+    padding-right: 4%;
+  }
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    text-align: right;
+    font-weight: bold;
+    block-sizing: 20px;
+    /* height:15px; */
+
+  }
+  .mat-table .mat-cell:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: .85em;
+    margin: 0%;
+  }
+  .mat-table .mat-cell:first-child {
+    padding: 0%;
+    padding-top: 3%;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,27 @@
+.region-alerts-container{
+ width: 190px;
+}
+
+.title{
+  color: yellow;
+  font-weight: 900;
+  padding-top: 5%;
+  font-size: 16px;
+}
+
+.alert-date-no-active{
+  font-size: 16px;
+  font-weight: 900;
+}
+.alert-date-active{
+  color: orangered;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.no-alert-msg{
+  font-size: 16px;
+  font-weight: 900;
+}
+
+

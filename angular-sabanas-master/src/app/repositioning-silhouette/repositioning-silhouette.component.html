@@ -1,0 +1,8 @@
+<div class="silhouette-container" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" color="primary">
+
+  <app-silhouette fxLayoutAlign="center center" [silhouette]="lastRepositioning?.silhouette"></app-silhouette>
+
+  <div *ngIf="lastRepositioning">
+    <span class="detail-content">{{postionChoices[lastRepositioning?.silhouette]}}</span>
+  </div>
+</div>

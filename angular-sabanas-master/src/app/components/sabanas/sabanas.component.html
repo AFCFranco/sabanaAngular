@@ -1,0 +1,204 @@
+<div class="custom-breadcrumb">
+  <mat-card >
+    <ol class="breadcrumb" >
+      <li class="breadcrumb-item">
+        <a routerLink="/">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Sábanas</li>
+    </ol>
+  </mat-card>
+</div>
+<div class="sabanas-card">
+  <mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="component-title">Sábanas y pacientes asociados</span>
+      <div>
+        <span>Ir al monitoreo</span>
+        <a class="monbutton" mat-icon-button [routerLink]="['/home/monitoring']">
+          <mat-icon>tv</mat-icon>
+          <mat-icon class="sabana-icon">view_module</mat-icon>
+        </a>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="indications-list" fxLayout="row" fxLayoutAlign="end center">
+      <div>
+        <span mat-list-item>
+          <mat-icon matIconList class="inactive-color">wifi_off</mat-icon>
+          : Sábana desconectada
+        </span>
+      </div>
+      <div>
+        <span mat-list-item>
+          <mat-icon matIconList class="active-color">wifi</mat-icon>
+          : Sábana conectada
+        </span>
+      </div>
+      <div>
+        <span mat-list-item>
+          <mat-icon matIconList class="inactive-color">view_comfy</mat-icon>
+          : Monitoreo inactivo
+        </span>
+      </div>
+      <div>
+        <span mat-list-item>
+          <mat-icon matIconList class="active-color">view_comfy</mat-icon>
+          : Monitoreo activo
+        </span>
+      </div>
+      <div>
+        <span mat-list-item>
+          <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+          : No aplica
+        </span>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="center center" *ngIf="dataSource?.loading$ | async">
+      <mat-spinner [diameter]="30" style="margin:auto auto;"></mat-spinner>
+    </div>
+
+    <mat-table class="patients-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+      <!-- nick Column -->
+      <ng-container matColumnDef="nick">
+        <mat-header-cell *matHeaderCellDef> Sábana </mat-header-cell>
+        <mat-cell data-label="Sábana" *matCellDef="let sabanaAndRecord"> {{sabanaAndRecord?.sabana?.nick}} </mat-cell>
+      </ng-container>
+      <!-- sabana_status Column -->
+      <ng-container matColumnDef="sabana_status">
+        <mat-header-cell *matHeaderCellDef> Estado sábana </mat-header-cell>
+        <mat-cell data-label="Estado sábana" *matCellDef="let sabanaAndRecord">
+          <button type="button" onclick="event.stopPropagation();" class="btn btn-sabana" placement="bottom"
+            [ngbPopover]="getSabanaInfoTooltip(sabanaAndRecord?.sabana)" container="body">
+            <div [ngClass]="{'active-color': sabanaAndRecord?.sabana?.status=='C', 
+          'inactive-color': sabanaAndRecord?.sabana?.status=='D'}">
+              <mat-icon matIconList *ngIf="sabanaAndRecord?.sabana?.status=='C'">wifi</mat-icon>
+              <mat-icon matIconList *ngIf="sabanaAndRecord?.sabana?.status=='D'">wifi_off</mat-icon>
+            </div>
+          </button>
+          <!-- <mat-icon matIconList *ngIf="sabanaAndRecord?.sabana?.status=='C'" style="color: blue;">wifi</mat-icon> -->
+        </mat-cell>
+      </ng-container>
+      <!-- record_status Column -->
+      <ng-container matColumnDef="record_status">
+        <mat-header-cell *matHeaderCellDef> Estado monitoreo </mat-header-cell>
+        <mat-cell data-label="Estado registro" *matCellDef="let sabanaAndRecord">
+          <div *ngIf="sabanaAndRecord?.record">
+            <button type="button" onclick="event.stopPropagation();" class="btn btn-record" placement="bottom"
+              [ngbPopover]="getRecordInfoTooltip(sabanaAndRecord?.record)">
+              <mat-icon matIconList [ngClass]="{'active-color': sabanaAndRecord?.record?.status=='A', 
+              'inactive-color': sabanaAndRecord?.record?.status=='I'}">view_comfy</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="!sabanaAndRecord?.record">
+            <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <!-- patient Column -->
+      <ng-container matColumnDef="patient">
+        <mat-header-cell *matHeaderCellDef> Paciente </mat-header-cell>
+        <mat-cell data-label="Paciente" *matCellDef="let sabanaAndRecord">
+          <div *ngIf="sabanaAndRecord?.record?.patient">
+            {{sabanaAndRecord?.record?.patient.first_name}}
+            {{sabanaAndRecord?.record?.patient.last_name}}
+          </div>
+          <div *ngIf="!sabanaAndRecord?.record?.patient">
+            <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <!-- gender Column -->
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef> Género </mat-header-cell>
+        <mat-cell data-label="Género" *matCellDef="let sabanaAndRecord">
+          <div *ngIf="sabanaAndRecord?.record?.patient?.gender">
+            {{genderChoices[sabanaAndRecord?.record?.patient?.gender]}}
+          </div>
+          <div *ngIf="!sabanaAndRecord?.record?.patient?.gender">
+            <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <!-- n_document Column -->
+      <ng-container matColumnDef="n_document">
+        <mat-header-cell *matHeaderCellDef> Número documento </mat-header-cell>
+        <mat-cell data-label="Número documento" *matCellDef="let sabanaAndRecord">
+          <div *ngIf="sabanaAndRecord?.record?.patient?.n_document">
+            {{sabanaAndRecord?.record?.patient?.n_document}}
+          </div>
+          <div *ngIf="!sabanaAndRecord?.record?.patient?.n_document">
+            <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+          </div>
+        </mat-cell>
+      </ng-container>
+      <!-- condition Column -->
+      <!--
+          <ng-container matColumnDef="condition">
+            <mat-header-cell *matHeaderCellDef> Condición del paciente </mat-header-cell>
+            <mat-cell data-label="" *matCellDef="let sabanaAndRecord">
+              <div *ngIf="sabanaAndRecord?.record?.condition">
+                {{sabanaAndRecord?.record?.condition}}
+              </div>
+              <div *ngIf="!sabanaAndRecord?.record?.condition">
+                <mat-icon class="no-apply-icon" matIconList>remove</mat-icon>
+              </div>
+            </mat-cell>
+          </ng-container>
+        -->
+      <!-- actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+        <mat-cell data-label="Acciones" *matCellDef="let sabanaAndRecord">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div *ngIf="sabanaAndRecord?.record?.status == 'I'">
+              <button class="action-button" mat-icon-button matTooltip="Eliminar registro" (click)="deleteRecord($event, sabanaAndRecord)">
+                <mat-icon >delete</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="sabanaAndRecord?.record?.status == 'A'">
+              <button class="action-button" mat-icon-button matTooltip="Finalizar registro" (click)="finishRecord($event, sabanaAndRecord)">
+                <mat-icon >stop</mat-icon>
+              </button>
+            </div>
+            <!-- <div *ngIf="sabanaAndRecord?.record?.status == 'A'">
+              <button mat-icon-button matTooltip="Pausar registro" (click)="stopRecord($event, sabanaAndRecord)">
+                <mat-icon class="action-button">pause</mat-icon>
+              </button>
+            </div> -->
+            <div *ngIf="sabanaAndRecord?.record?.status == 'I'">
+              <button  class="action-button" mat-icon-button matTooltip="Iniciar monitoreo" (click)="startRecord($event, sabanaAndRecord)">
+                <mat-icon>play_arrow</mat-icon>
+              </button>
+            </div>
+            <!-- <div *ngIf="sabanaAndRecord?.record">
+              <button mat-icon-button matTooltip="Ver configuraciones del registro">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+            </div> -->
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- detalles -->
+      <!-- <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-icon>more_horiz</mat-icon>
+        </mat-header-cell>
+        <mat-cell data-label="" *matCellDef="let sabanaAndRecord">
+
+        </mat-cell>
+      </ng-container> -->
+
+      <!-- mat-header-row es un componente combinado con la directiva matHeaderRowDef (que determina la 
+            configuración de orden de la cabecera de la tabla) aplica estilo material-->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!-- mat-row es un componente combinado con la directiva matRowDef, determinan como deben 
+            verse los datos de la tabla. la propiedad columns especifica el orden de los datos -->
+      <mat-row *matRowDef="let row; columns: displayedColumns; let index=index" class="patient-row" [ngClass]="{'highlight': expandedRow === index}"
+        (click)="expandRow(index, row)" #cdkrow>
+      </mat-row>
+    </mat-table>
+
+  </mat-card>
+</div>

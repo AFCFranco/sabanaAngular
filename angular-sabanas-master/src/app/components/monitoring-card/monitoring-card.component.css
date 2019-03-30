@@ -1,0 +1,41 @@
+
+.monitoring-card{
+  padding: 1%;
+}
+
+
+.m-card-header{
+  color: rgb(13, 131, 167);
+  font-weight: bold;
+}
+.configurations-menu{
+  padding: 15%;
+}
+.configurations-title{
+  font-weight: bold;
+  padding-bottom: 4%;
+  color: rgb(13, 131, 167);
+}
+
+.configurations-list{
+  color: rgb(88, 88, 88);
+  font-weight: bold;
+}
+
+
+
+
+
+span{
+  font-size: 120%;
+}
+app-pressure-map{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.custom-divider{
+  margin-top: 5px;
+  margin-bottom: 5px; 
+}
+

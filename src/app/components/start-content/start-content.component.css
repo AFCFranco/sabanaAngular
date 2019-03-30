@@ -1,0 +1,21 @@
+.start-container{
+  height: 80%;
+  width: 100%;
+}
+
+.span1{
+  font-size: 300%;
+  font-weight: bold;
+  color: dimgrey;
+}
+
+.span2{
+  font-weight: bold; 
+  color: rgba(105, 105, 105, 0.712);
+}
+
+.logoGibic{
+  max-width: 45%;
+}
+
+

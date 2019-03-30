@@ -1,0 +1,14 @@
+.card-login {
+  max-width: 25rem;
+  min-width: 360px;
+}
+
+span{
+  color: darkred;
+  font-size: 70%;
+}
+
+
+.card-header{
+  font-weight: 900;
+}

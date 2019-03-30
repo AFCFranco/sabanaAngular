@@ -1,0 +1,36 @@
+<div class="custom-breadcrumb">
+  <mat-card>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="/">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/home/sabanas">Sábanas</a>
+      </li>
+      <li class="breadcrumb-item active">Monitoreo</li>
+    </ol>
+  </mat-card>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="browserRefresh">
+  <mat-spinner [diameter]="30" style="margin:auto auto;"></mat-spinner>
+</div>
+
+<div class="card-content" *ngIf="!browserRefresh">
+  <mat-card>
+    <div fxLayout="column" fxFlex>
+      <!-- <div fxLayout="row" fxLayoutAlign="start">
+        <span class="card-title">Monitoreo de registros</span>
+      </div> -->
+      <div fxLayout="row wrap" fxLayoutAlign="space-around" fxFlex >
+        <div style="margin-bottom: 20px;" fxFlex.xs="100"  [style.mmin-width]="responsive_min_width" *ngFor="let item of records; let i = index">
+          <app-monitoring-card  [record]="item">
+          </app-monitoring-card>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="monitoring-cards-container" fxLayout="row wrap" *ngIf="records" fxLayoutAlign="center center">
+    </div> -->
+  </mat-card>
+</div>

@@ -1,0 +1,611 @@
+@import '~@angular/material/theming';
+// @import '~@angular/material/core/theming/all-theme';
+
+$mat-custom-primary:(50: #E6E6E6,
+100: #C2C2C2,
+200: #999999,
+300: #707070,
+400: #515151,
+500: #323232,
+600: #2D2D2D,
+700: #262626,
+800: #1F1F1F,
+900: #131313,
+A100: #EF6C6C,
+A200: #EA3E3E,
+A400: #F50000,
+A700: #DB0000,
+contrast: (50: $dark-primary-text,
+100: $dark-primary-text,
+200: $dark-primary-text,
+300: $dark-primary-text,
+400: $dark-primary-text,
+500: $dark-primary-text,
+600: $light-primary-text,
+700: $light-primary-text,
+800: $light-primary-text,
+900: $light-primary-text,
+A100: $dark-primary-text,
+A200: $dark-primary-text,
+A400: $dark-primary-text,
+A700: $light-primary-text,
+));
+
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+// $primary: mat-palette($mat-deep-purple);
+// $accent:  mat-palette($mat-amber, A200, A100, A400);
+
+// $theme: mat-light-theme($primary, $accent);
+
+// @include angular-material-theme($theme);
+
+// $dark-primary: mat-palette($mat-custom-primary, 700, 500, 900);
+// $dark-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+// $dark-warn:    mat-palette($mat-deep-orange);
+
+// $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// @include angular-material-theme($dark-theme);
+
+
+$sabanas-primary: mat-palette($mat-custom-primary, 700, 100, 900);
+$sabanas-accent: mat-palette($mat-blue, A400, 100, 900);
+$sabanas-warn: mat-palette($mat-deep-orange, 400, 100, 900);
+$sabanas-title:#5CB5E3;
+$sabanas-row-selected:rgba(0, 128, 128, 0.5);
+
+$sabanas-theme: mat-dark-theme($sabanas-primary, $sabanas-accent, $sabanas-warn);
+
+$card-header: mat-palette($mat-teal, 700, 500, 900);
+
+mat-card-title {
+  background-color: mat-color($card-header);
+  color: floralwhite;
+}
+
+.custom-breadcrumb {
+  ol {
+    background-color: mat-color($sabanas-primary);
+  }
+}
+
+
+
+// mat-nav-list,
+mat-list {
+  [mat-list-item].active {
+    mat-icon[matListIcon] {
+      color: $sabanas-title;
+      font-size: 30px;
+    }
+
+    .option-text {
+      color: $sabanas-title;
+      margin: 0 16px 0 16px;
+      font-size: 20px;
+    }
+  }
+
+  [mat-list-item].deactive {
+    mat-icon[matListIcon] {
+      color: $light-primary-text;
+      font-size: 20px;
+    }
+
+    .option-text {
+      color: $light-primary-text;
+      margin: 0 16px 0 16px;
+      font-size: 20px;
+    }
+  }
+}
+
+// .app-name{
+// }
+.app-name {
+  font-size: 20px;
+  // color: $sabanas-title;
+  margin: 0 16px 0 16px;
+}
+
+.user-name {
+  color: $sabanas-title;
+}
+
+.sidenav-container {
+  .custom-nav-item{
+    &:hover{
+      background-color: rgba($sabanas-title, 0.1);
+      cursor: move;
+    }
+  }
+
+  .deactive{
+    mat-icon {
+      margin: 0 0px 0 25px;
+      vertical-align: middle;
+      color: $light-primary-text;
+      font-size: 18px;
+    }
+
+    .option-text {
+      vertical-align: middle;
+      color: $light-primary-text;
+      margin: 0 16px 0 16px;
+      font-size: 18px;
+    }
+  }
+
+  .active{
+    mat-icon{
+      margin: 0 0px 0 25px;
+      vertical-align: middle;
+      color: $sabanas-title;
+      font-size: 18px;
+    }
+
+    .option-text {
+      vertical-align: middle;
+      color: $sabanas-title;
+      margin: 0 16px 0 16px;
+      font-size: 18px;
+    }
+  }
+  
+  .item-group-sidenav {
+    border-top: 1px solid gray;
+  }
+  
+  .item-group-title {
+    font-size: 18px;
+    color: gray;
+    margin: 0 16px 0 16px;
+    font-weight: 900;
+
+  }
+
+}
+
+.card-login {}
+
+
+
+.user-config-container {
+  mat-slide-toggle {
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  .mat-form-field-label {
+    color: $light-primary-text !important;
+  }
+
+  .mat-form-field-ripple {
+    background-color: $sabanas-title !important;
+  }
+
+  .mat-focused .mat-form-field-label {
+    color: $sabanas-title !important;
+  }
+
+  .error-text {
+    color: red;
+  }
+
+  .success-text {
+    color: greenyellow;
+  }
+
+  .card-container {
+    margin-top: 20px;
+  }
+
+  .title {
+    font-size: 25px;
+    font-weight: bold;
+    padding: 25px;
+    color: $sabanas-title;
+  }
+
+  .update-pass {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-weight: 900;
+    background-color: $sabanas-title;
+    color: $dark-primary-text;
+  }
+
+  .text-data {
+    color: gray;
+    font-weight: 900;
+  }
+}
+
+
+.component-title {
+  font-size: 25px;
+  font-weight: bold;
+  padding: 25px;
+  color: $sabanas-title;
+}
+
+.patients-table {
+  margin-top: 10px;
+
+  mat-header-cell {
+    color: $dark-primary-text;
+    font-size: 20px;
+    font-weight: bold;
+    font-size: 100%;
+  }
+
+  mat-header-row {
+    background-color: $sabanas-title;
+  }
+
+  mat-row:hover {
+    background-color: $sabanas-row-selected;
+    color: $dark-primary-text;
+    cursor: pointer;
+  }
+
+  .highlight {
+    background-color: $sabanas-row-selected;
+  }
+}
+
+.sabanas-card {
+  margin: 5px;
+
+  .indications-list{
+    .span{
+      vertical-align: middle;
+    }
+    .mat-icon{
+      vertical-align: middle;
+    }
+  }
+
+  .no-apply-icon{
+    color:gray;
+  }
+
+  .active-color {
+    color: $sabanas-title;
+  }
+
+  .inactive-color {
+    color: gray;
+  }
+
+  .monbutton {
+    background: $sabanas-title;
+    margin: 5px;
+    box-shadow: 0px 0px 8px $dark-primary-text;
+    margin-right: 25px;
+    color: $dark-primary-text;
+  }
+
+  .action-button {
+    color: $dark-primary-text;
+    background-color: $sabanas-title;
+    margin: 5px;
+    box-shadow: 0px 0px 8px $dark-primary-text;
+    // border-radius: 50%;
+  }
+
+  .mat-column-actions {
+    // color: darkblue;
+
+    text-align: center;
+    margin-right: 10px;
+    justify-content: center;
+  }
+  
+}
+
+.sabanas-details-container {
+  .sabanas-details-created-at{
+    color: gray;
+  }
+
+  .title{
+    color: $sabanas-title;
+    font-size: 20px;
+    font-weight: bold; 
+    margin-bottom: 10px;
+  }
+
+  .mat-form-field-label {
+    color: $light-primary-text !important;
+  }
+
+  .mat-form-field-ripple {
+    background-color: $sabanas-title !important;
+  }
+
+  .mat-focused .mat-form-field-label {
+    color: $sabanas-title !important;
+  }
+
+  .create-record-btn {
+    background: $sabanas-title;
+    margin: 5px;
+    box-shadow: 0px 0px 8px $dark-primary-text;
+    margin-right: 25px;
+    color: $dark-primary-text;
+  }
+}
+
+.monitoring-card {
+
+  .title {
+    font-weight: bold;
+    // color: rgb(13, 131, 167);
+    color: $sabanas-title;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .detail-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    color: gray;
+  }
+
+  .detail-content {
+    font-size: 16px;
+    text-align: center;
+    justify-content: center;
+    color: $light-primary-text;
+  }
+}
+
+.silhouette-container {
+  .detail-content {
+    color: $light-primary-text;
+  }
+}
+
+.bed-orientation-container {
+  position: relative;
+  justify-content: center;
+
+  .detail-content {
+    color: mat-color($sabanas-accent);
+  }
+}
+
+.repositioning-container {
+
+  .timer-container {
+    // background-color: rgba(255, 248, 220, 0.171);
+    box-shadow: 0 0 10px rgb(97, 97, 97);
+  }
+
+  .span-title-container {
+    text-align: center;
+  }
+
+  .span-title {
+    color: $sabanas-title;
+    font-weight: bold;
+  }
+
+  .span-timer {
+    color: rgba($light-primary-text, 0.5); //rgba(3, 146, 146, 0.966);
+    padding-left: 2px;
+    padding-right: 2px;
+    -webkit-text-fill-color: $light-primary-text;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    border-radius: 10%;
+    font-size: 200%;
+  }
+
+  .span-timer-alert {
+    color: rgba(mat-color($sabanas-warn), 0.5); //rgba(128, 2, 29, 0.932);
+    padding-left: 2px;
+    padding-right: 2px;
+    -webkit-text-fill-color: mat-color($sabanas-warn); //rgba(209, 14, 56, 0.932);/* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    border-radius: 10%;
+    font-size: 200%;
+    // background-color: rgba(mat-color($sabanas-warn),0.15);
+  }
+
+
+
+  .span-units {
+    color: gray;
+    font-weight: 900;
+    font-size: 90%;
+  }
+
+  .span-units-alert {
+    color: gray;
+    font-weight: 900;
+    font-size: 90%;
+  }
+
+  .repositioning-button {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    font-weight: 900;
+    background-color: $sabanas-title;
+    color: $dark-primary-text;
+  }
+}
+
+.region-alarms-table {
+  mat-header-row {
+    min-height: 20px;
+    font-weight: 900;
+    background-color: #5CB5E3;
+    margin: 0;
+    padding: 0;
+  }
+
+  mat-header-cell {
+    color: $dark-primary-text;
+    font-weight: 900;
+    font-size: 15px;
+    /* min-height: 15px; */
+  }
+
+  .s1-color {
+    color: #5CB5E3;
+  }
+
+  .s2-color {
+    color: #4dd4ae;
+  }
+
+  .s3-color {
+    color: #6eed38;
+  }
+
+  .s4-color {
+    color: #cfb521;
+  }
+
+  .s5-color {
+    color: #e41a1c;
+  }
+
+  .inactive-region {
+    color: $sabanas-title;
+    /* animation: anim-search 2s infinite linear; */
+    animation: 2s infinite linear;
+    animation: anim-active 1s infinite linear;
+  }
+
+  .active-region {
+    color: orange;
+    animation: anim-search 2s infinite linear;
+    /* animation: anim-active 1s infinite linear; */
+  }
+
+  .danger-region {
+    color: red;
+    animation: anim-danger 4s .7s ease-in-out infinite;
+  }
+
+  .btn-status:focus {
+    outline: none;
+  }
+
+  mat-row:hover {
+    background-color: $sabanas-row-selected;
+    color: $dark-primary-text;
+    cursor: pointer;
+  }
+
+  .cronometer-setpoint {
+    font-weight: 900;
+    color: gray;
+  }
+
+  .cronometer-value {
+    font-weight: 900;
+    color: $sabanas-title;
+  }
+
+  .cronometer-value-danger {
+    font-weight: 900;
+    color: red;
+  }
+}
+
+
+.dialog-repositioning-container {
+
+
+
+  .condition{
+    color: lightblue;
+  }
+  .mat-form-field-label {
+    color: $light-primary-text !important;
+    font-size: 20px;
+  }
+  
+  .mat-form-field-ripple {
+    background-color: $sabanas-title !important;
+  }
+  
+  .mat-focused .mat-form-field-label {
+    font-size: 20px;
+    color: $sabanas-title !important;
+  }
+
+  .title {
+    color: $sabanas-title;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5%;
+  }
+
+  .region-r1,
+  .region-r2,
+  .region-r3,
+  .region-r4,
+  .region-r5 {
+    background-color: $sabanas-title;
+  }
+
+
+  .sensibility-title {
+    color: $dark-primary-text;
+  }
+
+  .elapsed-time-title {
+    color: $dark-primary-text;
+  }
+
+  .repositioning-button {
+    margin-top: 10%;
+    margin-bottom: 5%;
+    background-color: $sabanas-title;
+    font-weight: 900;
+    color: $dark-primary-text;
+    ;
+  }
+}
+
+.silueta {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  fill: #ffffff33;
+  stroke: white;
+  opacity: 1;
+  pointer-events: none;
+}
+
+
+.alert-container {
+  color: mat-color($sabanas-warn); //rgba(239, 108, 0, .87);
+  background-color: rgba(mat-color($sabanas-warn), 0.15);
+
+  .alert-title {
+    font-weight: 900;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  }
+
+  .alert-content {
+    font-weight: 100;
+  }
+}
+
+
+@include angular-material-theme($sabanas-theme);

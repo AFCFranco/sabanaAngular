@@ -1,0 +1,118 @@
+<div>
+  <mat-card class="monitoring-card" >
+    <div fxLayout="column" fxLayoutGap="gappx">
+      <div fxLayout="row" fxFlex="100">
+        <div>
+          <mat-icon class="title">airline_seat_flat_angled</mat-icon>
+        </div>
+        <div>
+          <span class="title">&emsp;Paciente: {{record?.patient?.first_name}} {{record?.patient?.last_name}}</span>
+        </div>
+      </div>
+      <div class="custom-divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div >
+        <app-pressure-map [record_id]="record?.id" ></app-pressure-map>
+      </div>
+      <div class="custom-divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div class="card-details" fxLayout="row" fxLayout.xs="column">
+        <div [fxFlex.gt-sm]="(record?.status == 'A') ? 33.3 : 100" fxFlex="100">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+            <span class="title">Detalles</span>
+            <div *ngIf="record.status=='A'" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+              <span class="detail-title">Inicio del registro:&ensp;</span>
+              <span class="detail-content">{{record?.start_date | date: 'M/d/yyyy, h:mm a'}}</span>
+            </div>
+            <!-- <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+              <span class="detail-title">Condición paciente:</span>
+              <span class="detail-content">{{record?.condition}}</span>
+              <mat-icon *ngIf="!record?.condition">remove</mat-icon>
+            </div> -->
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+              <span class="detail-title">Cambios de posición:</span>
+              <span class="detail-content">{{record?.repositioning_count}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="record?.status == 'A'" fxLayout="column" fxFlex.gt-sm="33.3" fxFlex="100" fxLayoutAlign="start center">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" >
+            <span class="title">Posición cama: </span>
+          </div>
+          <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center">
+            <app-bed-orientation [record_id]="record?.id"></app-bed-orientation>
+          </div>
+        </div>
+        <div *ngIf="record?.status == 'A'" fxLayout="column" fxFlex.gt-sm="33.3" fxFlex="100">
+          <span class="title">Posición paciente: </span>
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" fxFlex="100">
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx" >
+              <app-repositioning-silhouette [record]="record"></app-repositioning-silhouette>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="custom-divider">
+        <mat-divider></mat-divider>
+      </div>
+      <div *ngIf="record?.status == 'A'" fxLayout="row" fxLayout.xs="column" fxFlex="100">
+        <app-repositioning  [record]="record"></app-repositioning>
+      </div>
+    </div>
+
+  </mat-card>
+</div>
+
+<!-- 
+
+<div class="monitoring-card-container"
+fxLayout="row"
+fxFlex
+fxFlex.xs="100" 
+fxFlex.sm="80"
+style="background-color: gold">
+<div fxFlex="100">
+  <mat-card class="monitoring-card">
+      <div fxFlex>
+        <mat-icon>airline_seat_flat_angled</mat-icon>
+        <span>&emsp;Paciente: {{record?.patient?.first_name}} {{record?.patient?.last_name}}</span>
+      </div>
+    </mat-card>
+</div>
+</div> -->
+
+
+<!-- <div class="m-card-header" fxLayout="row" fxFlex fxLayoutAlign="space-between center" fxLayoutGap="gappx" >
+        <div fxFlex>
+          <mat-icon>airline_seat_flat_angled</mat-icon>
+          <span>&emsp;Paciente: {{record?.patient?.first_name}} {{record?.patient?.last_name}}</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <app-pressure-map [record_id]="record?.id"></app-pressure-map>
+      <mat-divider></mat-divider>
+      <div class="card-details" fxLayout="row" fxLayout.xs="column">
+        <div fxFlex.gt-sm="50" fxFlex="100">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+            <span class="title">Detalles</span>
+            <div *ngIf="record.status=='A'" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+              <span class="detail-title">Fecha inicio:&ensp;</span>
+              <span class="detail-content">{{record?.start_date | date: 'yyyy-MM-dd HH:mm a'}}</span>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+              <span class="detail-title">Condición paciente:</span>
+              <span class="detail-content">{{record.condition}}</span>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="column" fxFlex.gt-sm="50" fxFlex="100">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+            <span class="title">Posición de la cama: </span>
+          </div>
+          <app-bed-orientation [record_id]="record?.id"></app-bed-orientation>
+        </div>
+      </div> -->

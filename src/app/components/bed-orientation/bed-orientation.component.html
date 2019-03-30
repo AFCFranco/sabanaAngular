@@ -1,0 +1,75 @@
+
+<div class="bed-orientation-container">
+  <div fxLayout="row" style="justify-content: center">
+
+
+    <svg #svgContainer width="140" height="80">
+      <!-- <g id="grap1">
+        <line id="bed-l1" x1="70" y1="50" x2="70" y2="90" ></line>
+        <circle id="pivot-bed-l1"  cx="70" cy="50" r="10"></circle>
+      </g>
+      <g>
+        <line id="bed-l3" x1="130" y1="50" x2="130" y2="90" ></line>
+        <circle id="pivot-bed-l3"  cx="130" cy="50" r="10"></circle>
+      </g> -->
+      <g>
+        <polyline points="40,25 100,25" fill="none" stroke-width="3px" stroke-dasharray="1.5" stroke="white"
+          stroke-linecap="round" />
+        <polyline points="40,35 100,35" fill="none" stroke-width="3px" stroke-dasharray="1.5" stroke="white"
+          stroke-linecap="round" />
+
+        <polyline points="45,30 45,20 95,20 95,30" fill="none" stroke-width="3px" stroke-dasharray="1.5" stroke="white"
+          stroke-linecap="round" />
+
+        <polyline points="50,35 50,70" fill="none" stroke-width="3px" stroke-dasharray="6" stroke="white"
+          stroke-linecap="round" />
+        <circle cx="50" cy="70" r="6" fill="none" stroke-width="3px" stroke-dasharray="3" stroke="white"
+          stroke-linecap="round" />
+
+        <polyline points="90,35 90,70" fill="none" stroke-width="3px" stroke-dasharray="6" stroke="white"
+          stroke-linecap="round" />
+        <circle cx="90" cy="70" r="6" fill="none" stroke-width="3px" stroke-dasharray="3" stroke="white"
+          stroke-linecap="round" />
+      </g>
+      <!-- <circle   cx="135" cy="50" r="5" fill="white" stroke-width="3px" stroke-dasharray="3" stroke="white" stroke-linecap="round"/> -->
+      <g>
+        <rect x="45" y="45" rx="2" ry="2" width="50" height="10" fill="none" stroke-width="3px" stroke-dasharray="3"
+          stroke="white" stroke-linecap="round"></rect>
+      </g>
+      <g>
+        <circle cx="35" cy="30" r="5" fill="white" stroke-width="3px" stroke-dasharray="3" stroke="white"
+          stroke-linecap="round" />
+        <circle cx="105" cy="30" r="5" fill="white" stroke-width="3px" stroke-dasharray="3" stroke="white"
+          stroke-linecap="round" />
+      </g>
+      <g>
+        <line id="bed-l1" x1="35" y1="30" x2="35" y2="50" stroke="#FFFFFFCC" stroke-width="8px" stroke-linecap="round"
+          transform="rotate(90 35 30)">
+        </line>
+        <line id="bed-l3" x1="105" y1="30" x2="105" y2="50" stroke="#FFFFFFCC" stroke-width="8px" stroke-linecap="round"
+          transform="rotate(270 105 30)">
+        </line>
+        <!-- <rect x="135" y="45" rx="5" ry="5" width="20" height="10"
+          fill="none" stroke-width="3px" stroke-dasharray="3" stroke="white" stroke-linecap="round"></rect>
+          <rect x="65" y="45" rx="5" ry="5" width="20" height="10"
+          transform=" rotate(45 65 45) translate(-7.01,-7.07)" fill="none" stroke-width="3px" stroke-dasharray="3" stroke="white" stroke-linecap="round"></rect> -->
+      </g>
+    </svg>
+
+    <!-- <canvas #bedCanvas fxFlex style="background-color: gray;"></canvas> -->
+  </div>
+  <div fxLayout="row" style="padding-right: 10%; padding-left: 10%;">
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-start">
+      <h6 class="detail-content" *ngIf="(lastBedOrientationObs | async)?.o1">
+        {{((lastBedOrientationObs | async)?.o1) - 90 | number}}°
+      </h6>
+      <h6 style="transform: scale(-1,1)">∡</h6>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+      <h6>∡</h6>
+      <h6  class="detail-content"*ngIf="(lastBedOrientationObs | async)?.o2">
+        {{(lastBedOrientationObs | async)?.o2 - 90 | number}}°
+      </h6>
+    </div>
+  </div>
+</div>

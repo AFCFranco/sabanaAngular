@@ -1,0 +1,26 @@
+
+.mat-sidenav-container {
+  height: 100vh;
+  padding: 0%;
+}
+.mat-sidenav {
+  width: 320px;
+}
+
+.mat-subheader {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.sidenav-title {
+  font-size: 20px;
+}
+
+
+
+ /* .active{
+  color: #5CB5E3;
+}  */
+
+
+

@@ -1,0 +1,25 @@
+<div class="repositioning-container" fxLayout="row" fxLayout.xs="column" fxFlex="100" fxLayoutGap="10px">
+  <div fxFlex.gt-sm="70" fxFlex="100" class="table-container">
+    <app-region-alerts-table *ngIf="lastRepositioning?.id" [repositioning_id]="lastRepositioning?.id" [record_id]="record.id"></app-region-alerts-table>
+  </div>
+  <div class="timer-container" fxLayout="column" fxLayoutAlign="center center" fxFlex.gt-sm="30" fxFlex="100">
+    
+    <div class="span-title-container">
+      <span class="span-title">Tiempo transcurrido para el reposicionamiento</span>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span [ngClass]="{'span-timer': !overflowed, 'span-timer-alert': overflowed}">
+        {{repositioningTimer.hour | number: '2.0-0'}}:{{repositioningTimer.min | number:
+        '2.0-0'}}:{{repositioningTimer.sec | number: '2.0-0'}}
+      </span>
+      <span [ngClass]="{'span-units': !overflowed, 'span-units-alert': overflowed}">HH:MM:SS</span>
+      <div fxLayout="row" fxLayoutAlign="center center">
+
+        <button class="repositioning-button" mat-raised-button (click)="repositioning($event)">
+          <mat-icon>shutter_speed</mat-icon>
+          Cambiar posición
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

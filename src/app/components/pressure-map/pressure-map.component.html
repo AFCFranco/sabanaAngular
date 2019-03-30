@@ -1,0 +1,97 @@
+<!-- You can use a custom html template with the `data-template` attr -->
+
+
+
+<div *ngIf="lastColorMap">
+  <div class="color-map-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="2.25px" fxFlex="100%">
+    <!-- <img *ngIf="r2Obs  | async" class="color-map" [src]="'data:image/jpg;base64,' + (imagePathObs | async)" /> -->
+    <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="90%"> -->
+    <div class="cotainer-column-1" fxFlex="30%" >
+      <div fxLayout="column" fxLayoutGap="2.25px" fxFlex="100%">
+        <div class="region-r1">
+          <img *ngIf="r1Obs  | async" class="lateral-image" [src]="'data:image/jpg;base64,' + (r1Obs | async)" />
+          <div class="region-title-r1">
+            <ng-template #tipContentR1>
+              <app-region-alerts region_name="R1" [region_alert]="lastRegionsAlerts?.r1"></app-region-alerts>
+            </ng-template>
+            <button mat-icon-button class="region-button" triggers="click" [autoClose]="'outside'"  placement="right" [ngbTooltip]="tipContentR1">
+              <mat-icon class="region-icon-button">notifications</mat-icon>
+            </button>
+            <span *ngIf="lastRegionsAlerts?.r1?.count > 0" class="notification-value">
+              {{(lastRegionsAlerts?.r1.count > 99) ? '+9' : lastRegionsAlerts?.r1.count}}
+            </span>
+          </div>
+        </div>
+        <div class="region-r4">
+          <img *ngIf="r4Obs  | async" class="lateral-image" [src]="'data:image/jpg;base64,' + (r4Obs | async)" />
+          <div class="region-title-r4">
+            <ng-template #tipContentR4>
+              <app-region-alerts region_name="R4" [region_alert]="lastRegionsAlerts?.r4"></app-region-alerts>
+            </ng-template>
+            <button mat-icon-button class="region-button" triggers="click" [autoClose]="'outside'"  placement="right" [ngbTooltip]="tipContentR4">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <span *ngIf="lastRegionsAlerts?.r4?.count > 0" class="notification-value">
+              {{(lastRegionsAlerts?.r4.count > 99) ? '+9' : lastRegionsAlerts?.r4.count}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cotainer-column-2" fxFlex="30.25%">
+      <div fxLayout="column"  fxFlex="100%">
+        <div class="region-r2">
+          <img *ngIf="r2Obs  | async" class="central-image" [src]="'data:image/jpg;base64,' + (r2Obs | async)" />
+          <div class="region-title-r2">
+            <ng-template #tipContentR2>
+              <app-region-alerts region_name="R2" [region_alert]="lastRegionsAlerts?.r2"></app-region-alerts>
+            </ng-template>
+            <button mat-icon-button class="region-button" triggers="click" [autoClose]="'outside'"  [ngbTooltip]="tipContentR2">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <span *ngIf="lastRegionsAlerts?.r2?.count > 0" class="notification-value">
+              {{(lastRegionsAlerts?.r2.count > 99) ? '+9' : lastRegionsAlerts?.r2.count}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cotainer-column-3" fxFlex="30%" >
+      <div fxLayout="column" fxLayoutGap="2.25px" fxFlex="100%">
+        <div class="region-r3">
+          <img *ngIf="r3Obs  | async" class="lateral-image" [src]="'data:image/jpg;base64,' + (r3Obs | async)" />
+          <div class="region-title-r3">
+            <ng-template #tipContentR3>
+              <app-region-alerts region_name="R3" [region_alert]="lastRegionsAlerts?.r3"></app-region-alerts>
+            </ng-template>
+            <button mat-icon-button class="region-button" triggers="click" [autoClose]="'outside'"  placement="left" [ngbTooltip]="tipContentR3">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <span *ngIf="lastRegionsAlerts?.r3?.count > 0" class="notification-value">
+              {{(lastRegionsAlerts?.r3.count > 99) ? '+9' : lastRegionsAlerts?.r3.count}}
+            </span>
+          </div>
+        </div>
+        <div class="region-r5">
+          <img *ngIf="r5Obs  | async" class="lateral-image" [src]="'data:image/jpg;base64,' + (r5Obs | async)" />
+          <div class="region-title-r5">
+            <ng-template #tipContentR5>
+              <app-region-alerts region_name="R5" [region_alert]="lastRegionsAlerts?.r5"></app-region-alerts>
+            </ng-template>
+            <button mat-icon-button class="region-button" triggers="click" [autoClose]="'outside'"   placement="left" [ngbTooltip]="tipContentR5">
+              <mat-icon>notifications</mat-icon>
+            </button>
+            <span *ngIf="lastRegionsAlerts?.r5?.count > 0" class="notification-value">
+              {{(lastRegionsAlerts?.r5.count > 99) ? '+9' : lastRegionsAlerts?.r5.count}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </div>
+</div>
+<div *ngIf="!lastColorMap">
+  <app-alert-div>
+  </app-alert-div>
+</div>

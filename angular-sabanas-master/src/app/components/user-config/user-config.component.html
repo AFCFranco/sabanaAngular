@@ -1,0 +1,73 @@
+<div class="user-config-container">
+  <div class="custom-breadcrumb">
+    <mat-card>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a routerLink="/">Inicio</a>
+        </li>
+        <li class="breadcrumb-item active">Configuraciones</li>
+      </ol>
+    </mat-card>
+  </div>
+
+  <div class="card-container" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+      <div class="title">Configuraciones de usuario</div>
+      <mat-divider></mat-divider>
+      <div class="text-data">Sonido:</div>
+      <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="gappx">
+        <span>{{user?.sound ? 'Activado' : 'Desactivado'}}</span>
+        <mat-slide-toggle [checked]="user?.sound" (change)="onChange($event)"></mat-slide-toggle>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="text-data">Cambio de contraseña:</div>
+      <div class="credentials">
+        <form class="example-form">
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+            <span class="error-text" *ngFor="let error of userService?.errors?.cur_password">{{ error }}</span>
+            <div fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="Contraseña actual" [type]="hideCurrent ? 'password' : 'text'" name="cur_password" [(ngModel)]="passwords.cur_password">
+                <mat-icon matSuffix (click)="hideCurrent = !hideCurrent">{{hideCurrent ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+            </div>
+            <span class="error-text" *ngFor="let error of userService?.errors?.new_password">{{ error }}</span>
+            <div fxFlex="100">
+              <mat-form-field>
+                <input matInput placeholder="Contraseña nueva" [type]="hideNew ? 'password' : 'text'" name="new_password" [(ngModel)]="passwords.new_password">
+                <mat-icon matSuffix (click)="hideNew = !hideNew">{{hideNew ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+            </div>
+            <span class="success-text" *ngIf="success">Se ha cambiado correctamente la clave de acceso.</span>
+          </div>
+        </form>
+        <div fxLayoutAlign="end center">
+          <button class="update-pass" mat-button (click)="updatePassword()" >
+            <span >Cambiar</span>
+          </button>
+        </div>
+            
+        <!-- <form>
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Contraseña actual" [type]="hideCurrent ? 'password' : 'text'" [(ngModel)]="passwords.cur_password"
+                name="cur_password">
+              <mat-icon matSuffix (click)="hideCurrent = !hideCurrent">{{hideCurrent ? 'visibility' :
+                'visibility_off'}}</mat-icon>
+            </mat-form-field>
+          </div>
+          <span *ngFor="let error of userService?.errors?.cur_password">{{ error }}</span>
+          <div fxLayout="row">
+            <mat-form-field fxFlex>
+              <input matInput placeholder="Contraseña nueva" [type]="hideNew ? 'password' : 'text'" [(ngModel)]="passwords.new_password"
+                name="new_password">
+              <mat-icon matSuffix (click)="hideNew = !hideNew">{{hideNew ? 'visibility' : 'visibility_off'}}</mat-icon>
+            </mat-form-field>
+          </div>
+          <span *ngFor="let error of userService?.errors?.new_password">{{ error }}</span>
+        </form> -->
+      </div>
+    </mat-card>
+  </div>
+
+</div>

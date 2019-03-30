@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  padding: 24px;
+  color: gray;
+  /* background: #F5f7fd; */
+  border-style: solid;
+  border-color: white;  
+  border-width: .5px;
+}
+
+.is-loading ::ng-deep .mat-option-text {
+  display: flex;
+  justify-content: center;
+}
+
+.button-create{
+  background:white; 
+  margin: 5px; 
+  box-shadow: 3px 3px 8px #888888;
+}
+
+
+
+
+.content-divider{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* #address, #name, #lastname {
+  min-width: 550px;
+} */

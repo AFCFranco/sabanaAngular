@@ -1,0 +1,23 @@
+
+
+.card-title{
+  font-size: 25px;
+  font-weight: bold;
+  color: teal;
+  padding: 12px;
+}
+
+.card-content{
+  padding-bottom: 50px;
+}
+
+
+.monitoring-cards-container{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  /* justify-content: center; */
+}
+
+
+

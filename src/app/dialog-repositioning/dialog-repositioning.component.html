@@ -1,0 +1,211 @@
+<div class="dialog-repositioning-container" fxLayout="column" fxLayoutGap="gappx">
+  <form #repositioningForm="ngForm" [formGroup]="myForm" (ngSubmit)="onSave()">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx">
+    <span class="title">{{title}}</span>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <!-- <div fxLayout="row" fxLayoutAlign="end center" fxFlex="100">
+        <div>
+          <span style="margin-right: 5px;">Observaciones del monitoreo</span>
+          <mat-icon class="observation-header-text">edit</mat-icon>
+        </div>
+      </div> -->
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+        <mat-form-field class="condition" fxFlex="100" appearance="fill">
+          <mat-label >Observaciones del monitoreo</mat-label>
+          <textarea matInput style="overflow:hidden" formControlName="condition" matTextareaAutosize matAutosizeMinRows=2 matAutosizeMaxRows=5>
+          </textarea>
+          <mat-icon matSuffix *ngIf="data.isEnableCondition">edit</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider  ></mat-divider>
+  </div>
+  <!-- <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="gappx">
+    <span class="subtitle" color="primary">{{subtitle}}</span>
+  </div> -->
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+        <mat-form-field>
+          <mat-select  placeholder="*Posición del paciente" autocomplete="nope" formControlName="silhouette" >
+            <mat-option *ngFor="let silhouetteChoice of silhouetteChoices" [(value)]="silhouetteChoice.value">
+              {{ silhouetteChoice.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="myForm.get('silhouette')?.invalid">Campo requerido</mat-error>
+        </mat-form-field>
+        <app-silhouette fxLayoutAlign="center center" [silhouette]="myForm.get('silhouette').value"></app-silhouette>
+      </div>
+
+      <div fxLayout="row" fxFlex="100" fxLayoutAlign="start center" fxLayoutGap="gappx">
+        <div class="content-text" fxLayout="column" fxFlex="100">
+          <mat-divider verticalTab></mat-divider>
+          <div color="primary" fxFlex="100">
+            Sensibilidad y tiempo máximo permitido:
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-icon-button (click)="showSensibilityDiv()" type="button">
+              <mat-icon *ngIf="!isSensibilityDivEnable">keyboard_arrow_down</mat-icon>
+              <mat-icon *ngIf="isSensibilityDivEnable">keyboard_arrow_up</mat-icon>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- <div *ngIf="isSensibilityDivEnable" fxLayout="row" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap="3px">
+        <span>Hola mundo</span>
+      </div> -->
+      <div *ngIf="isSensibilityDivEnable" fxLayout="row" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap="3px">
+        <div class="cotainer-column-1" fxFlex="33%">
+          <div fxLayout="column" fxLayoutGap="2px" fxFlex="100%">
+            <div class="region-r1" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                  <span class="sensibility-title">Sensibilidad</span>
+                </div>
+                <div>
+                  
+                  <select #sr1 formControlName="sr1"  style="width: 70px">
+                    <option *ngFor="let sensibility of sensibilitiesChoices"   [value]="sensibility.value">
+                      {{sensibility.viewValue}}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <span class="elapsed-time-title">Duración</span>
+                </div>
+                <div>
+                  <select #et1 formControlName="et1"  style="width: 70px">
+                    <option *ngFor="let elapsed_time of elapsedTimeChoices" [value]="elapsed_time.value">
+                      {{elapsed_time.viewValue}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="region-r4" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                  <span class="sensibility-title">Sensibilidad</span>
+                </div>
+                <div>
+                    <select #sr4 formControlName="sr4"  style="width: 70px">
+                        <option *ngFor="let sensibility of sensibilitiesChoices" [ngClass]="{'s1-color': sensibility === 1,'s2-color': sensibility === 2,
+                      's3-color': sensibility === 3, 's4-color': sensibility === 4, 's5-color': sensibility === 5}"  [value]="sensibility.value">
+                          {{sensibility.viewValue}}
+                        </option>
+                      </select>
+                </div>
+                <div>
+                  <span class="elapsed-time-title">Duración</span>
+                </div>
+                <div>
+                  <select #et4 formControlName="et4"  style="width: 70px">
+                    <option *ngFor="let elapsed_time of elapsedTimeChoices" [value]="elapsed_time.value">
+                      {{elapsed_time.viewValue}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cotainer-column-2" fxFlex="33%" style="background-color: blueviolet">
+          <div fxLayout="column" fxFlex="100%">
+            <div class="region-r2" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                  <span class="sensibility-title">Sensibilidad</span>
+                </div>
+                <div>
+                    <select #sr2 formControlName="sr2"  style="width: 70px">
+                        <option *ngFor="let sensibility of sensibilitiesChoices" [ngClass]="{'s1-color': sensibility === 1,'s2-color': sensibility === 2,
+                      's3-color': sensibility === 3, 's4-color': sensibility === 4, 's5-color': sensibility === 5}" [value]="sensibility.value">
+                          {{sensibility.viewValue}}
+                        </option>
+                      </select>
+                </div>
+                <div>
+                  <span class="elapsed-time-title">Duración</span>
+                </div>
+                <div>
+                  <select #et2 formControlName="et2"  style="width: 70px">
+                    <option *ngFor="let elapsed_time of elapsedTimeChoices" [value]="elapsed_time.value">
+                      {{elapsed_time.viewValue}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cotainer-column-3" fxFlex="33%">
+          <div fxLayout="column" fxLayoutGap="2px" fxFlex="100%">
+            <div class="region-r3" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                  <span class="sensibility-title">Sensibilidad</span>
+                </div>
+                <div>
+                  <select #sr3 formControlName="sr3"  style="width: 70px">
+                    <option *ngFor="let sensibility of sensibilitiesChoices"  [value]="sensibility.value">
+                      <div style="color: brown">
+                        {{sensibility.viewValue}}
+                      </div>
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <span class="elapsed-time-title">Duración</span>
+                </div>
+                <div>
+                  <select #et3 formControlName="et3"  style="width: 70px">
+                    <option *ngFor="let elapsed_time of elapsedTimeChoices" [value]="elapsed_time.value">
+                          {{elapsed_time.viewValue}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="region-r5" fxLayout="column" fxLayoutAlign="center center">
+              <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+                <div>
+                  <span class="sensibility-title">Sensibilidad</span>
+                </div>
+                <div>
+                  <select #sr5 formControlName="sr5"  style="width: 70px">
+                    <option  *ngFor="let sensibility of sensibilitiesChoices"  [ngStyle]="{'background-color':red}" [value]="sensibility.value">
+                      
+                      {{sensibility.viewValue}}
+                    </option>
+                  </select>
+                </div>
+                <div>
+                  <span class="elapsed-time-title">Duración</span>
+                </div>
+                <div>
+                  <select #et5 formControlName="et5"  style="width: 70px">
+                    <option *ngFor="let elapsed_time of elapsedTimeChoices" [value]="elapsed_time.value">
+                      {{elapsed_time.viewValue}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-divider verticalTab></mat-divider>
+    <div mat-dialog-actions fxLayoutAlign="end center">
+      <!-- <button mat-button (click)="onOutsideClick()">Descartar</button> -->
+      <button class="repositioning-button" mat-raised-button cdkFocusInitial (click)="startRepositioning()">
+        <mat-icon>shutter_speed</mat-icon>
+        Iniciar
+      </button>
+    </div>
+  </form>
+</div>
